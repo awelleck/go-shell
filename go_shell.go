@@ -1,8 +1,11 @@
 package main
-import ("fmt"
-		"bufio"
-		"os"
-		"github.com/google/shlex")
+
+import (
+	"bufio"
+	"fmt"
+	"github.com/google/shlex"
+	"os"
+)
 
 func shell() {
 	fmt.Printf("in shell func\n")
@@ -22,5 +25,5 @@ func executor() {
 
 func main() {
 	fmt.Printf("in main func\n")
-	shell()	
+	shell()
 }
