@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/google/shlex"
 	"os"
+	"os/exec"
 )
 
 func shell() {
@@ -16,11 +17,15 @@ func shell() {
 		text, _ := reader.ReadString('\n')
 		token_text, _ := shlex.Split(text)
 		fmt.Println(token_text)
+		return token_text
 	}
 }
 
 func executor() {
-	//possibly use os.Open()
+	//using os/exec to execute commands
+	cmd := exec.Command()
+	err := cmd.Run()
+    }
 }
 
 func main() {
