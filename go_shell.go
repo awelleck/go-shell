@@ -12,7 +12,7 @@ func main() {
 
 	for {
 		fmt.Print("> ")
-		text, _ := reader.ReadSring('\n')
+		text, _ := reader.ReadString('\n')
 		//fmt.Println(text)
 
 		if text == "exit" {
