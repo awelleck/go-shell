@@ -3,32 +3,30 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/google/shlex"
 	"os"
 	"os/exec"
 )
 
-func shell() {
-	fmt.Printf("in shell func\n")
+func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
 		fmt.Print("> ")
-		text, _ := reader.ReadString('\n')
-		token_text, _ := shlex.Split(text)
-		fmt.Println(token_text)
-		return token_text
+		text, _ := reader.ReadSring('\n')
+		//fmt.Println(text)
+
+		if text == "exit" {
+			fmt.Println("Exiting gracefully...")
+			os.Exit(0)
+		}
+
+		lsCmd := exec.Command("bash", "-c", text)
+		lsOut, err := lsCmd.Output()
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println("Command executing:", text)
+		fmt.Println(string(lsOut))
 	}
-}
-
-func executor() {
-	//using os/exec to execute commands
-	cmd := exec.Command()
-	err := cmd.Run()
-    }
-}
-
-func main() {
-	fmt.Printf("in main func\n")
-	shell()
 }
