@@ -17,7 +17,7 @@ func main() {
 
 		if text == "exit" {
 			fmt.Println("Exiting gracefully...")
-			os.Exit(0)
+			exit_shell()
 		}
 
 		lsCmd := exec.Command("bash", "-c", text)
