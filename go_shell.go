@@ -10,6 +10,7 @@ import (
 )
 
 func helper() {
+	//Use a channel to handle SIGINT, prompt user
 	sigc := make(chan os.Signal, 1)
 	signal.Notify(sigc, syscall.SIGINT)
 	for {
@@ -35,6 +36,7 @@ func main() {
 			fmt.Println("Exiting gracefully...")
 			os.Exit(0)
 		}
+		//Execute command using exec
 		cmdIn := exec.Command("bash", "-c", text)
 		cmdOut, err := cmdIn.Output()
 		if err != nil {
