@@ -8,26 +8,24 @@ import (
 )
 
 func main() {
-	reader := bufio.NewReader(os.Stdin)
-
-	for {
-		fmt.Print("> ")
-		text, _ := reader.ReadString('\n')
-		//fmt.Println(text)
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Print("> ")
+	for scanner.Scan() {
+		text := scanner.Text()
 
 		if text == "exit" {
 			fmt.Println("Exiting gracefully...")
-			exit_shell()
+			os.Exit(0)
 		}
 
-		lsCmd := exec.Command("bash", "-c", text)
-		lsOut, err := lsCmd.Output()
+		cmdIn := exec.Command("bash", "-c", text)
+		cmdOut, err := cmdIn.Output()
+
 		if err != nil {
-			fmt.Println(text, "was not a valid command.")
-			//panic(err)
+			fmt.Printf("%s was not a valid command.", text)
 		}
 
-		fmt.Println("Command executing:", text)
-		fmt.Println(string(lsOut))
+		fmt.Println(string(cmdOut))
+		fmt.Print("> ")
 	}
 }
