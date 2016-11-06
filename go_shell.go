@@ -22,29 +22,32 @@ func helper() {
 	}
 }
 
+func executor(text string) {
+	//Execute command using exec
+	cmdIn := exec.Command("bash", "-c", text)
+	cmdOut, err := cmdIn.Output()
+
+	if err != nil {
+		fmt.Printf("%s was not a valid command.\n", text)
+	}
+
+	fmt.Print(string(cmdOut))
+}
+
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	//Go routine
 	go helper()
-
 	fmt.Print("> ")
-	for scanner.Scan() {
 
+	for scanner.Scan() {
 		text := scanner.Text()
 		if text == "exit" {
 			fmt.Println("Exiting gracefully...")
 			os.Exit(0)
 		}
-		//Execute command using exec
-		cmdIn := exec.Command("bash", "-c", text)
-		cmdOut, err := cmdIn.Output()
-		if err != nil {
-			fmt.Printf("%s was not a valid command.\n", text)
-
-		}
-		fmt.Print(string(cmdOut))
+		executor(text)
 		fmt.Print("> ")
 	}
-
 }
