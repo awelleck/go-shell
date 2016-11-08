@@ -2,8 +2,8 @@
 Simple shell in Go.
 
 ## Steps to run
--You will need to have golang installed.
--Clone code.
+* You will need to have golang installed.
+* Clone code.
 * `go run go_shell.go`
 
 ## TODO
