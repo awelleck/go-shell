@@ -3,8 +3,8 @@ Simple shell in Go.
 
 ## Steps to run
 * You will need to have golang installed.
-* Clone code.
-* `go run go_shell.go`
+* Clone code: `git clone https://github.com/awelleck/go-shell.git`
+* Run: `go run go_shell.go`
 
 ## TODO
 1. Fix cd
