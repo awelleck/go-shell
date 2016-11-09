@@ -1,4 +1,5 @@
 # go-shell
+[![Build Status](https://travis-ci.org/awelleck/go-shell.svg?branch=master)](https://travis-ci.org/awelleck/go-shell)
 Simple shell in Go.
 
 ## Steps to run
