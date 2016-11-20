@@ -2,6 +2,6 @@ language: go
 go:
   - 1.3
   - master
-script: go build ./...
+script: go build ./... && go test ./...
 notifications:
   email: False
