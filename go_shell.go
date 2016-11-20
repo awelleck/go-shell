@@ -22,16 +22,16 @@ func helper() {
 	}
 }
 
-func executor(text string) {
+func executor(text string) (string, error) {
 	//Execute command using exec
 	cmdIn := exec.Command("bash", "-c", text)
 	cmdOut, err := cmdIn.Output()
 
 	if err != nil {
-		fmt.Printf("%s was not a valid command.\n", text)
+		return "", fmt.Errorf("%s was not a valid command.\n", text)
 	}
 
-	fmt.Print(string(cmdOut))
+	return string(cmdOut), nil
 }
 
 func main() {
@@ -47,7 +47,15 @@ func main() {
 			fmt.Println("Exiting gracefully...")
 			os.Exit(0)
 		}
-		executor(text)
+
+		output, err := executor(text)
+
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Printf(output)
+		}
+
 		fmt.Print("> ")
 	}
 }
