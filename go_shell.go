@@ -3,10 +3,17 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 	"os/signal"
+	"strings"
 	"syscall"
+)
+
+var (
+	history    []string
+	historyPos int
 )
 
 func helper() {
@@ -23,15 +30,31 @@ func helper() {
 }
 
 func executor(text string) (string, error) {
-	//Execute command using exec
-	cmdIn := exec.Command("bash", "-c", text)
-	cmdOut, err := cmdIn.Output()
+	//add to history, so we can go back to it.
+	history = append(history, text)
 
-	if err != nil {
-		return "", fmt.Errorf("%s was not a valid command.\n", text)
+	// seperate strings by spaces
+	tokenCommand := strings.Split(text, " ")
+
+	var output string
+	switch tokenCommand[0] {
+	case "cd":
+		err := os.Chdir(tokenCommand[1])
+		if err != nil {
+			log.Printf("Error changing to directory %s: %v", tokenCommand[1], err)
+		}
+	case "history":
+		fmt.Println(history)
+	default:
+		// Execute command using exec
+		cmdIn := exec.Command("bash", "-c", text)
+		cmdOut, err := cmdIn.Output()
+		if err != nil {
+			return "", fmt.Errorf("%s was not a valid command.\n", text)
+		}
+		output = string(cmdOut)
 	}
-
-	return string(cmdOut), nil
+	return output, nil
 }
 
 func main() {
@@ -39,8 +62,8 @@ func main() {
 
 	//Go routine
 	go helper()
-	fmt.Print("> ")
 
+	fmt.Print("> ")
 	for scanner.Scan() {
 		text := scanner.Text()
 		if text == "exit" {
