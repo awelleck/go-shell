@@ -1,11 +1,11 @@
 package main
 
 import (
-  "testing"
-  "github.com/stretchr/testify/require"
+	"github.com/stretchr/testify/require"
+	"testing"
 )
 
-func testEcho (t *testing.T) {
+func testEcho(t *testing.T) {
 	echo_cmd := "echo Hello World"
 	test_output, err := executor(echo_cmd)
 	require.NoError(t, err)
