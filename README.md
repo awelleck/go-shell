@@ -6,7 +6,7 @@ Simple shell in Go. It is assumed that this will only run on Unix based operatin
 ## Steps to run
 * You will need to have [Go](https://golang.org/) installed
 * Clone code: `git clone https://github.com/awelleck/go-shell.git`
-* Run: `go run go_shell.go`
+* Run: `go run shell.go`
 
 ## Steps to run tests
 * `cd awelleck/go-shell`
