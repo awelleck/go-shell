@@ -18,6 +18,5 @@ Simple shell in Go. It is assumed that this will only run on Unix based operatin
 * Go concurrency patterns
 
 ## TODO
-1. Fix cd
-2. Find alternative to exec bash
-3. Create test cases
+1. Find alternative to exec bash
+2. Create test case for exit
